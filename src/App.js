@@ -38,6 +38,7 @@ const App = () => {
       roomId
     })
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
 
   return (
