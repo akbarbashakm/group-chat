@@ -9,7 +9,7 @@ export const sendSocketMessage = (name, payload) => {
     }
 };
 
-export default ({ children, action, setId }) => {
+export default ({ children, action, setId, setToastMessage }) => {
 
     if (!socket) {
         socket = io.connect('http://localhost:8080/', { transports: ['websocket'] });
@@ -29,6 +29,10 @@ export default ({ children, action, setId }) => {
             if (socket.id !== arg.socketId) {
                 action(msg => ([...msg, arg]));
             }
+        })
+
+        socket.on('notification', (msg) => {
+            setToastMessage(msg)
         })
 
         socket.on('connect_error', () => {

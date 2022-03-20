@@ -34,21 +34,25 @@ io.on('connection', function (socket) {
     })
 
     socket.on('addUser', function (args) {
-        const { roomId } = args;
+        const { roomId, name } = args;
         socket.join(roomId);
         currentRoomId = roomId;
+        socket.broadcast.emit('notification', `${name} joined in ${roomId}`);
     });
 
     socket.on('changeRoom', function (args) {
-        const { roomId } = args;
+        const { roomId, name } = args;
         socket.leave(currentRoomId);
         socket.join(roomId);
         currentRoomId = roomId;
+        if (name) {
+            socket.broadcast.emit('notification', `${name} changed room to ${roomId}`);
+        }
     })
 
     socket.on('sendMessage', function (args) {
         const { roomId } = args;
-        io.sockets.in(roomId).emit('sendMessageComplete', args)
+        io.sockets.in(roomId).emit('sendMessageComplete', args);
     })
 });
 

@@ -5,11 +5,13 @@ import Modal from './components/Modal';
 import GroupsPanel from './components/GroupsPanel';
 import Messages from './components/Messages';
 import Socket, { sendSocketMessage } from './socket';
+import Toast from './components/Toast';
 
 
 const App = () => {
   const [roomId, setRoomId] = useState('entertainment');
   const [name, setName] = useState(null);
+  const [toastMessage, setToastMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const [socketId, setSocketId] = useState('');
 
@@ -17,7 +19,8 @@ const App = () => {
     setMessages([]);
     sendSocketMessage('changeRoom', {
       socketId,
-      roomId
+      roomId,
+      name
     })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -26,7 +29,7 @@ const App = () => {
   return (
     <Socket setId={(id) => {
       setSocketId(id)
-    }} action={setMessages}>
+    }} action={setMessages} setToastMessage={setToastMessage}>
       <Root>
         <Section flex="0.4">
           <GroupsPanel roomId={roomId} setRoomId={setRoomId} />
@@ -43,9 +46,11 @@ const App = () => {
         setName(val);
         sendSocketMessage('addUser', {
           socketId,
-          roomId
+          roomId,
+          name: val
         })
       }} /> : null}
+      <Toast toastMessage={toastMessage}/>
     </Socket>
   )
 }
