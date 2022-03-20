@@ -20,8 +20,6 @@ export default ({ children, action, setId, setToastMessage }) => {
                 if (reason === 'io server disconnect') {
                     socket.connect();
                 }
-
-                // Connected false
             });
         });
 
@@ -35,47 +33,47 @@ export default ({ children, action, setId, setToastMessage }) => {
             setToastMessage(msg)
         })
 
-        socket.on('connect_error', () => {
-            // Connected false
-        });
+        // socket.on('connect_error', () => {
+        //     // Connected false
+        // });
 
-        socket.on('connect_timeout', () => {
-            // Connected false
-        });
+        // socket.on('connect_timeout', () => {
+        //     // Connected false
+        // });
 
-        socket.on('error', (error) => {
-            if (error === 'authentication error') {
-                socket.disconnect();
-                // Auth Error 
-            }
-            else if (error === 'Internal server error') {
-                socket.disconnect();
-                // Error 
-            } else {
-                // Connected false
-            }
-        });
+        // socket.on('error', (error) => {
+        //     if (error === 'authentication error') {
+        //         socket.disconnect();
+        //         // Auth Error 
+        //     }
+        //     else if (error === 'Internal server error') {
+        //         socket.disconnect();
+        //         // Error 
+        //     } else {
+        //         // Connected false
+        //     }
+        // });
 
-        socket.on('reconnect', () => {
-            // Connected false
-        });
+        // socket.on('reconnect', () => {
+        //     // Connected false
+        // });
 
-        socket.on('reconnect_attempt', () => {
-            // Connected false
-        });
+        // socket.on('reconnect_attempt', () => {
+        //     // Connected false
+        // });
 
-        socket.on('reconnecting', () => {
-            // Connected false
-        });
+        // socket.on('reconnecting', () => {
+        //     // Connected false
+        // });
 
-        socket.on('reconnect_error', () => {
-            // Connected false
-        });
+        // socket.on('reconnect_error', () => {
+        //     // Connected false
+        // });
 
 
-        socket.on('reconnect_failed', () => {
-            // Connected false
-        });
+        // socket.on('reconnect_failed', () => {
+        //     // Connected false
+        // });
     }
 
     return children;
