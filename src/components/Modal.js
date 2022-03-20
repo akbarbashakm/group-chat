@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 
-const Root = styled.div`
+const Root = styled.form`
     display: block;
     position: fixed;
     z-index: 1;
@@ -55,7 +55,8 @@ const Modal = ({
                 <input type={'text'} value={value} placeholder={"Enter your name"} onChange={(e) => {
                     setValue(e.target.value)
                 }} />
-                <button onClick={(e) => {
+                <button type={"submit"} onClick={(e) => {
+                    e && e.preventDefault();
                     setName(value)
                 }}>Add User</button>
             </Content>

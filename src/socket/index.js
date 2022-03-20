@@ -12,7 +12,7 @@ export const sendSocketMessage = (name, payload) => {
 export default ({ children, action, setId }) => {
 
     if (!socket) {
-        socket = io.connect('http://localhost:3100', { transports: ['websocket'] });
+        socket = io.connect('http://localhost:8080/', { transports: ['websocket'] });
         socket.on('connect', () => {
             setId(socket.id);
             // Connected True
@@ -71,10 +71,6 @@ export default ({ children, action, setId }) => {
 
         socket.on('reconnect_failed', () => {
             // Connected false
-        });
-
-        socket.on("event://get-message", () => {
-
         });
     }
 
